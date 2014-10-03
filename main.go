@@ -34,11 +34,8 @@ func Render(beegoCtx *context.Context, tmpl string, ctx Context) {
 	mutex.RUnlock()
 
 	if !ok || devMode {
-		var err error
-		template, err = p2.FromFile("templates/" + tmpl)
-		if err != nil {
-			panic(err)
-		}
+		template, _ = p2.FromFile("templates/" + tmpl)
+		
 		mutex.Lock()
 		templates[tmpl] = template
 		mutex.Unlock()
